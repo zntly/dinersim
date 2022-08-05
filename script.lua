@@ -115,6 +115,7 @@ for _, v in pairs(game:GetService("Workspace").DinerPlaceHolder.Sittables:GetChi
     if mom == false then return end
     local chr = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     local hrp = chr:WaitForChild("HumanoidRootPart")
+    local hand = chr:WaitForChild("RightHand")
     hrp.CFrame = v:FindFirstChild("Table").CFrame
     task.wait(0.5)
     fireproximityprompt(v:FindFirstChild("Table"):FindFirstChild("Attachment"):FindFirstChild("Take Order"))
@@ -160,7 +161,7 @@ for _, v in pairs(game:GetService("Workspace").DinerPlaceHolder.Sittables:GetChi
         ["NPC"] = v:FindFirstChildOfClass("ObjectValue").Value
     }
     }
-    game:GetService("ReplicatedStorage").Remotes.Plating:InvokeServer(unpack(args))
+    repeat task.wait(); game:GetService("ReplicatedStorage").Remotes.Plating:InvokeServer(unpack(args)); until (not hand:FindFirstChild("Obj_Weld"))
 end
 end
 end
