@@ -1,4 +1,3 @@
-getgenv().on = true
 function getstorage(itemm)
 for a, b in pairs(game:GetService("Workspace").DinerPlaceHolder.Storages:GetChildren()) do
     if b.Name == itemm then
@@ -17,6 +16,7 @@ local storage = getstorage(ing)
             }
         }
     game:GetService("ReplicatedStorage").Remotes.Purchase:InvokeServer(unpack(args))
+    task.wait(0.5)
     elseif storage <= 0 and (string.find(ing, "Cooked")) then
         local f = {string.gsub(ing, "Cooked", "Uncooked")}
         local storage2 = getstorage(f[1])
@@ -28,6 +28,7 @@ local storage = getstorage(ing)
             }
         }
     game:GetService("ReplicatedStorage").Remotes.Purchase:InvokeServer(unpack(args))
+    task.wait(0.5)
         end
             local args = {
         [1] = "AcquireIngredient",
@@ -60,6 +61,7 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.Cook:InvokeServer(unpack(args))
+task.wait(0.5)
 local args = {
     [1] = "PlaceIngredient",
     [2] = {
@@ -68,6 +70,7 @@ local args = {
     }
     }
 game:GetService("ReplicatedStorage").Remotes.Cook:InvokeServer(unpack(args))
+task.wait(0.5)
 return
     end
     local args = {
@@ -78,6 +81,7 @@ return
         }
     }
     game:GetService("ReplicatedStorage").Remotes.Cook:InvokeServer(unpack(args))
+    task.wait(0.5)
     local args = {
     [1] = "PlaceIngredient",
     [2] = {
@@ -86,6 +90,7 @@ return
     }
     }
     game:GetService("ReplicatedStorage").Remotes.Cook:InvokeServer(unpack(args))
+    task.wait(0.5)
 
 end
 function getifhasdish(sittable)
@@ -136,16 +141,18 @@ for _, v in pairs(game:GetService("Workspace").DinerPlaceHolder.Sittables:GetChi
     for c, d in pairs(plate.PlatePlaceHolder.RequiredAtt.BillboardGui.IngredientsNeededHolder.H:GetChildren()) do
         if d.ClassName == "Frame" and d.Name ~= "Name_Holder" and d.Name ~= "Ingredient_Needed" then
             addtoplate(d.Name, plate)
+            task.wait(1)
         end
     end
     plate.PlatePlaceHolder.ChildAdded:Wait()
-    task.wait(0.25)
+    task.wait(0.5)
     local args = {
     [1] = {
         ["Object"] = plate
     }
     }
     game:GetService("ReplicatedStorage").Remotes.Plating:InvokeServer(unpack(args))
+    task.wait(0.5)
     hrp.CFrame = v:FindFirstChildOfClass("ObjectValue").Value:FindFirstChild("HumanoidRootPart").CFrame
     task.wait(0.5)
     local args = {
