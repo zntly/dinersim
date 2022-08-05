@@ -1,3 +1,4 @@
+getgenv().on = true
 function getstorage(itemm)
 for a, b in pairs(game:GetService("Workspace").DinerPlaceHolder.Storages:GetChildren()) do
     if b.Name == itemm then
@@ -117,6 +118,9 @@ for _, v in pairs(game:GetService("Workspace").DinerPlaceHolder.Sittables:GetChi
     task.wait(0.5)
     local item = getifhasdish(v).Name
     local plate = game:GetService("ReplicatedStorage").Remotes.ChangeMenu:InvokeServer(item, "CreatePlate")
+    if plate == nil then
+        repeat task.wait(); plate = game:GetService("ReplicatedStorage").Remotes.ChangeMenu:InvokeServer(item, "CreatePlate"); until plate ~= nil
+    end
     task.wait()
     local args = {
         [1] = {
